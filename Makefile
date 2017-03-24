@@ -1,5 +1,5 @@
 all:
-	@ gcc -o helice helice.c -lglut -lGLU -lGL -lm 
-	@ ./helice
+	@ gcc -o exe main.c helice.h -lglut -lGLU -lGL -lm 
+	@ ./exe
 clear:
-	rm helice -f
+	rm exe -f

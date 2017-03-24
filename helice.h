@@ -1,9 +1,7 @@
 #include<GL/glut.h>
 #include<math.h>
-#include<stdio.h>
 
 #define DEG_TO_RAD M_PI/180
-
 
 GLfloat xc = 200.0f;
 GLfloat yc = -150.0f;
@@ -22,8 +20,6 @@ void drawOriginMill(int n, int r){
     GLfloat ang    = 0.0f;     // Ângulo para ir construindo os triângulos
     GLfloat varAng = 2*M_PI/n; // Incremento do ângulo proporcional ao número de triângulos
 
-    // Define uma como de desenho
-    glColor3f(0.0f, 0.0f, 0.0f);  
 
     for (; n > 0; n--){
         // Define os vértices do triângulo
@@ -59,8 +55,6 @@ void drawHelix(int n, int h, float angH){
     angE     *= DEG_TO_RAD;
     angETemp *= DEG_TO_RAD;
 
-    // Define uma como de desenho
-    glColor3f(0.0f, 0.0f, 0.0f);  
 
     for (; n > 0; n--){
         // Define os vértices do triângulo
@@ -72,58 +66,4 @@ void drawHelix(int n, int h, float angH){
         
         angETemp += angH + angE; 
     }
-}
-
-void Draw(void){ 
-
-    // Define cor de fundo da cena
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-
-    // Pinta a tela com a cor definida acima
-    glClear(GL_COLOR_BUFFER_BIT);
-
-    // Inicia a matriz de transformações da openGL
-    glMatrixMode(GL_MODELVIEW); 
-    //glLoadIdentity();
-
-    // Desenha o centro do moinho
-    drawOriginMill(20, 7);
-    // Desenha as hélices do moinho
-    drawHelix(4, 60, 40.0);
-
-  glFlush();     
-}
-
-void on_mouse_click(int button, int state, int x, int y){
-    
-    if (state == GLUT_DOWN) {
-
-        if (button == GLUT_LEFT_BUTTON) {
-            glTranslatef(xc * (1.0f), yc * (1.0f), 0.0f);
-            glRotatef(15.0f, 0.0f, 0.0f, 1.0f);
-            glTranslatef(xc * (-1.0f), yc * (-1.0f), 0.0f);
-        }
-        else if (button == GLUT_RIGHT_BUTTON) {
-            glTranslatef(xc * (1.0f), yc * (1.0f), 0.0f);
-            glRotatef(-15.0f, 0.0f, 0.0f, 1.0f);
-            glTranslatef(xc * (-1.0f), yc * (-1.0f), 0.0f);
-        }
-        // Força a glut redesenhar a cena
-        glutPostRedisplay();
-    } 
-}
-
-
-int main(int argc, char* argv[])
-{
-    glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-    glutInitWindowSize(800, 600);
-    glutCreateWindow("Exemplo OpenGL");
-    glutDisplayFunc(Draw);
-    glutMouseFunc(on_mouse_click);
-
-    gluOrtho2D(-400, 400, -300, 300);
-        
-    glutMainLoop();
 }
