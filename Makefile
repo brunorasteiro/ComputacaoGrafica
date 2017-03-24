@@ -1,5 +1,5 @@
 all:
-	@ gcc -o exe main.c helice.h -lglut -lGLU -lGL -lm 
-	@ ./exe
+	@ gcc -o prog.exe main.c helice.h -lglut -lGLU -lGL -lm 
+	@ ./prog.exe
 clear:
-	rm exe -f
+	rm prog.exe -f
