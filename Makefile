@@ -6,10 +6,13 @@ endif
 
 LIB_OPTIONS := -lglut -lGLU -lGL -lm
 
--include custom_options.mk
-# If you need different libraries to compile the project,
-# write LIB_OPTIONS := <your options> inside custom_libs.mk.
-# custom_options.mk is also gitignored
+ifdef HUGO
+    INC_PATH := -Ic:/tools/include
+    LIB_PATH := -Lc:/tools/lib/x64
+    LIBS     := -lfreeglut -lglu32 -lopengl32 -lm
+
+    LIB_OPTIONS := $(INC_PATH) $(LIB_PATH) $(LIBS)
+endif
 
 SOURCES = $(wildcard src/*.c)
 
