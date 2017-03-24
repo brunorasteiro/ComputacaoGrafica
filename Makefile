@@ -18,7 +18,7 @@ SOURCES = $(wildcard src/*.c)
 
 .PHONY: all
 all:
-	gcc $(SOURCES) -Isrc -o bin/$(TARGET) $(LIB_OPTIONS)
+	gcc $(SOURCES) -Wall -Wextra -Isrc -o bin/$(TARGET) $(LIB_OPTIONS)
 
 .PHONY: run
 run:
