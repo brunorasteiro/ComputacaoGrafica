@@ -4,15 +4,12 @@
 
 #define DEG_TO_RAD M_PI/180
 
-GLfloat R = 0.0f;
-GLfloat G = 0.0f;
-GLfloat B = 0.0f;
 
-GLfloat sorteia_cor() {
-    return (rand()*1.0f) / (RAND_MAX*1.0f);
-}
+GLfloat xc = 200.0f;
+GLfloat yc = -150.0f;
 
-void drawOriginMill(int x, int y, int n, int r){
+
+void drawOriginMill(int n, int r){
 
     //******************************//
     //  DESENHA O CENTRO DO MOINHO  //
@@ -26,14 +23,14 @@ void drawOriginMill(int x, int y, int n, int r){
     GLfloat varAng = 2*M_PI/n; // Incremento do ângulo proporcional ao número de triângulos
 
     // Define uma como de desenho
-    glColor3f(R, G, B);  
+    glColor3f(0.0f, 0.0f, 0.0f);  
 
     for (; n > 0; n--){
         // Define os vértices do triângulo
         glBegin(GL_TRIANGLES);
-            glVertex2f(x, y);
-            glVertex2f(x + r*cos(ang), y + r*sin(ang));
-            glVertex2f(x + r*cos(ang + varAng), y + r*sin(ang + varAng));
+            glVertex2f(xc, yc);
+            glVertex2f(xc + r*cos(ang), yc + r*sin(ang));
+            glVertex2f(xc + r*cos(ang + varAng), yc + r*sin(ang + varAng));
         glEnd();
 
         // Incrementa o angulo até 2*PI
@@ -43,16 +40,17 @@ void drawOriginMill(int x, int y, int n, int r){
 }
 
 
-void drawPropeller(int x, int y, int n, int h, float angH){
+void drawHelix(int n, int h, float angH){
     //******************************//
     // DESENHA AS HÉLICES DO MOINHO //
     //******************************//
     
-    // x    = coordenada x do centro das hélices
-    // y    = coordenada y do centro das hélices
+    // xc   = coordenada x do centro das hélices
+    // yc   = coordenada y do centro das hélices
     // n    = número de hélices
     // h    = altura de cada hélice
     // angH = ângulo abertura de cada hélice
+    // dir  = 0 - Não rotaciona; 1 - Anti-horário; 2 - Horário 
     GLfloat     angE = (360 - (angH*n)) / n; // Angulo de espaçamento entre as hélices 
     GLfloat     angETemp = angE/2;
     
@@ -62,14 +60,14 @@ void drawPropeller(int x, int y, int n, int h, float angH){
     angETemp *= DEG_TO_RAD;
 
     // Define uma como de desenho
-    glColor3f(R, G, B);  
+    glColor3f(0.0f, 0.0f, 0.0f);  
 
     for (; n > 0; n--){
         // Define os vértices do triângulo
         glBegin(GL_TRIANGLES);
-            glVertex2f(x, y);
-            glVertex2f(x + h*cos(angETemp), y + h*sin(angETemp));
-            glVertex2f(x + h*cos(angETemp + angH), y + h*sin(angETemp + angH));
+            glVertex2f(xc, yc);
+            glVertex2f(xc + h*cos(angETemp), yc + h*sin(angETemp));
+            glVertex2f(xc + h*cos(angETemp + angH), yc + h*sin(angETemp + angH));
         glEnd();
         
         angETemp += angH + angE; 
@@ -85,25 +83,13 @@ void Draw(void){
     glClear(GL_COLOR_BUFFER_BIT);
 
     // Inicia a matriz de transformações da openGL
-    //glMatrixMode(GL_MODELVIEW); 
+    glMatrixMode(GL_MODELVIEW); 
     //glLoadIdentity();
 
-    // Define a cor preto para desenhar os eixos cartesianos
-    glColor3f(0.0f, 0.0f, 0.0f);  
-    glBegin(GL_LINES);
-        glVertex2f(-400, 0);
-        glVertex2f(400, 0);
-    glEnd();
-    glBegin(GL_LINES);
-        glVertex2f(0, -300);
-        glVertex2f(0, 300);
-    glEnd();
-
-
     // Desenha o centro do moinho
-    drawOriginMill(200, -150, 20, 7);
+    drawOriginMill(20, 7);
     // Desenha as hélices do moinho
-    drawPropeller(200, -150, 4, 60, 40.0);
+    drawHelix(4, 60, 40.0);
 
   glFlush();     
 }
@@ -113,22 +99,19 @@ void on_mouse_click(int button, int state, int x, int y){
     if (state == GLUT_DOWN) {
 
         if (button == GLUT_LEFT_BUTTON) {
-            //glRotatef(10.0f,0.0f,0.0f,1.0f);
-            
-            R = sorteia_cor();
-            G = sorteia_cor();
-            B = sorteia_cor();
+            glTranslatef(xc * (1.0f), yc * (1.0f), 0.0f);
+            glRotatef(15.0f, 0.0f, 0.0f, 1.0f);
+            glTranslatef(xc * (-1.0f), yc * (-1.0f), 0.0f);
         }
         else if (button == GLUT_RIGHT_BUTTON) {
-            R = 0.0f;
-            G = 0.0f;
-            B = 0.0f;
+            glTranslatef(xc * (1.0f), yc * (1.0f), 0.0f);
+            glRotatef(-15.0f, 0.0f, 0.0f, 1.0f);
+            glTranslatef(xc * (-1.0f), yc * (-1.0f), 0.0f);
         }
         // Força a glut redesenhar a cena
         glutPostRedisplay();
     } 
 }
-
 
 
 int main(int argc, char* argv[])
@@ -138,7 +121,6 @@ int main(int argc, char* argv[])
     glutInitWindowSize(800, 600);
     glutCreateWindow("Exemplo OpenGL");
     glutDisplayFunc(Draw);
-
     glutMouseFunc(on_mouse_click);
 
     gluOrtho2D(-400, 400, -300, 300);
