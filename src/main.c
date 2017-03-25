@@ -9,6 +9,7 @@ void draw(void)
     // Pinta a tela com a cor definida acima
     glClear(GL_COLOR_BUFFER_BIT);
 
+	drawSunAndSky();
 	drawMillHead();
 
     glFlush();
@@ -19,7 +20,7 @@ int main(int argc, char* argv[])
 	// Criacao de janela
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-    glutInitWindowSize(800, 600);
+    glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     glutCreateWindow("Trabalho 1");
 
 	// Bindings
@@ -27,7 +28,9 @@ int main(int argc, char* argv[])
     glutMouseFunc(on_mouse_click);
 
 	// Projecao 2D
-    gluOrtho2D(-400, 400, -300, 300);
+    gluOrtho2D(
+		VIEW_MINX, VIEW_MAXX,
+		VIEW_MINY, VIEW_MAXY);
 
     glutMainLoop();
 }
