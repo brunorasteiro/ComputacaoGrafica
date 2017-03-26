@@ -66,7 +66,7 @@ void drawSunAndSky()
 
 		glBegin(GL_TRIANGLES);
 		{
-			glColor3f(1.0, 1.0, 0.875);
+			glColor3f(1.0, 1.0, 0.75);
 			glVertex2f(cx, cy);
 
 			glColor3f(1.0, 1.0, 0.375);
