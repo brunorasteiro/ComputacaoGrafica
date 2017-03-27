@@ -22,7 +22,7 @@ void on_mouse_click(int, int, int, int);
 
 // Cada um implementa um desses aqui
 void drawSunAndSky();
-void drawGround();
+void drawTerrain();
 void drawMillTower();
 void drawMillHead();
 

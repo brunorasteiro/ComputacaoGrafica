@@ -1,25 +1,32 @@
 # Catavento - SCC0250
 
-## Pasta bin
-* Colocar arquivos dll na pasta bin/
-* No comando make clean, deletar só o programa, pra não levar os dlls junto
+## Compilação
 
-## Opções de compilação
-As bibliotecas que eu uso são diferentes das do Rasteiro, aí eeu botei um if pra mim no makefile e eu compilo com
+O executavel é criado na pasta bin, então dá pra botar os .dlls lá.
+Se precisar usar opções de compilação diferentes pro seu pc, só precisa criar um ifdef no makefile:
 
-    make HUGO=1
+	ifdef NOME
+		# exemplo
+		LIB_OPTIONS = -lfreeglut -lglu -lopengl32 -lm
+	endif
 
-Se no de vocês não compilar, é só botar no Makefile:
-
-    ifdef NOME
-        (mudar opcoes aqui)
-    endif
-
-e depois compilar com
+e depois setar a variavel na hora de compilar:
 
 	make NOME=1
 
+## Arquivos
 
-## Gitignore
-* Os arquivos da pasta bin
-* Botei um tal .directory, se der bosta a gente tira.
+**interface.h** declara umas constantes, por exemplo tamanho da tela, coordenadas dos cantos, posição do moinho etc,
+e os protótipos das funções que cada um tem que fazer:
+
+* void drawSunAndSky(); -> Hugo
+* void drawTerrain(); -> M Vinicius
+* void drawMillTower(); -> Raul
+* void drawMillHead(); -> Rasteiro
+
+**main.c** dá include em **interface.h** e chama essas funções em sequência.
+Os outros 2 arquivos contém **void drawSunAndSky()** e **voidDrawMillHead()**. Cada um implementa uma das duas.
+
+## Bugs
+
+O desenho inteiro tá girando junto com o catavento.
