@@ -1,12 +1,15 @@
 #include <GL/glut.h>
 #include <math.h>
 #include "interface.h"
-#include "helice.h"
+
+// Prototipos das funcoes
+void drawOriginMill(int, int);
+void drawHelix(int, int, float);
 
 #define DEG_TO_RAD M_PI/180
 
-GLfloat xc = 200.0f;
-GLfloat yc = -150.0f;
+GLfloat xc = MILL_CENTERX;
+GLfloat yc = MILL_CENTERY;
 
 void drawMillHead()
 {
@@ -26,6 +29,7 @@ void drawMillHead()
 }
 
 // Achei melhor tirar do main e botar aqui por causa das globais xc, yc
+// BUG: Ta girando a imagem inteira em vez de so a helice do catavento
 void on_mouse_click(int button, int state, int x, int y){
 
 	// Pra tirar warning de variavel nao usada
