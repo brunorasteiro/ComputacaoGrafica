@@ -1,7 +1,6 @@
 #include <math.h>
 #include <GL/glut.h>
 #include "interface.h"
-#include "sun_and_sky.h"
 
 const double pi = 3.1415926535;
 
@@ -53,16 +52,16 @@ void drawSunAndSky()
 	GLfloat cy = VIEW_MAXY * 2 / 3;
 	// Raio do sol
 	GLfloat r = 32;
-	// Raio da luz
+	// Espessura da luz
 	GLfloat light = 32;
 	// Numero de triangulos
 	GLint count = 32;
 
-	// Vertices da base do triangulo e da parte de dentro dos trapezios da luz
+	// Vertices do contorno do sol
 	GLint x[2] = {0, 0};
 	GLint y[2] = {0, 0};
 
-	// Vertices da parte de fora dos trapezios da luz
+	// Vertices das bases dos trapezios que fazem o efeito de luz
 	GLint lx[2] = {0, 0};
 	GLint ly[2] = {0, 0};
 
@@ -72,7 +71,7 @@ void drawSunAndSky()
 		double aux0 = 2*pi * i/count;
 		double aux1 = 2*pi * (i+1)/count;
 
-		// Calcula a posicao dos vertices dos triangulos do sol e dos trapezios da luz
+		// Calcula posicao de cada vertice, exceto o do centro
 		x[0] = cx + r * sin(aux0);
 		x[1] = cx + r * sin(aux1);
 
@@ -85,37 +84,42 @@ void drawSunAndSky()
 		ly[0] = cy + (r+light) * cos(aux0);
 		ly[1] = cy + (r+light) * cos(aux1);
 
-		// Desenha triangulos do sol
+		// Triangulos do sol
 		glBegin(GL_TRIANGLES);
 		{
-			// Centro meio branco
+			// Centro branco
 			glColor3f(1.0, 1.0, 1.0);
 			glVertex2f(cx, cy);
 
-			// Contorno meio amarelo
+			// Contorno amarelo
 			glColor3f(1.0, 1.0, 0.625);
 			glVertex2f(x[0], y[0]);
 			glVertex2f(x[1], y[1]);
 		}
 		glEnd();
 
+		// Ativa transparencia
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-		// Desenha trapezios da luz
+		// Trapezios do efeito de luz
 		glBegin(GL_QUADS);
 		{
+			// Mesmos vertices do contorno do sol
 			glColor4f(1.0, 1.0, 0.625, 1.0);
 			glVertex2f(x[0], y[0]);
 			glVertex2f(x[1], y[1]);
 
-			// Transicao de amarelo pra azulado/transparente
+			// Transicao para azulado/transparente
+			// Obs: os vertices tem que ficar nessa ordem
 			glColor4f(0.5, 0.5, 1.0, 0.0);
 			glVertex2f(lx[1], ly[1]);
 			glVertex2f(lx[0], ly[0]);
 		}
 		glEnd();
 
+		// Desativa transparencia
 		glDisable(GL_BLEND);
+
 	}
 }
