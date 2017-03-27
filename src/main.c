@@ -10,6 +10,8 @@ void draw(void)
     glClear(GL_COLOR_BUFFER_BIT);
 
 	drawSunAndSky();
+	// drawGround();
+	// drawMillTower();
 	drawMillHead();
 
     glFlush();
@@ -28,9 +30,11 @@ int main(int argc, char* argv[])
     glutMouseFunc(on_mouse_click);
 
 	// Projecao 2D
+	glMatrixMode(GL_PROJECTION);
     gluOrtho2D(
 		VIEW_MINX, VIEW_MAXX,
-		VIEW_MINY, VIEW_MAXY);
+		VIEW_MINY, VIEW_MAXY
+	);
 
     glutMainLoop();
 }
