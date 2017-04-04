@@ -13,23 +13,20 @@ GLfloat yc = MILL_CENTERY;
 
 void drawMillHead()
 {
-	// Inicia a matriz de transformações da openGL
-    glMatrixMode(GL_MODELVIEW);
-    //glLoadIdentity();
-
     // Define uma cor para o desenho
     glColor3f(0.238f, 0.173f, 0.14f);
+    
     // Desenha as hélices do moinho
     drawHelix(4, 60, 40.0);
 
     // Define uma cor para o desenho
     glColor3f(0.0f, 0.0f, 0.0f);
+    
     // Desenha o centro do moinho
     drawOriginMill(20, 7);
 }
 
 // Achei melhor tirar do main e botar aqui por causa das globais xc, yc
-// BUG: Ta girando a imagem inteira em vez de so a helice do catavento
 void on_mouse_click(int button, int state, int x, int y){
 
 	// Pra tirar warning de variavel nao usada
@@ -64,10 +61,10 @@ void drawOriginMill(int n, int r){
     //  DESENHA O CENTRO DO MOINHO  //
     //******************************//
 
-    // x = Coordenada x do centro da circunferência
-    // y = Coordenada y do centro da circunferência
-    // n = Número de triangulos para aproximação do círculo
-    // r = Raio do círculo
+    // xc = Coordenada x do centro da circunferência
+    // yc = Coordenada y do centro da circunferência
+    // n  = Número de triangulos para aproximação do círculo
+    // r  = Raio do círculo
     GLfloat ang    = 0.0f;     // Ângulo para ir construindo os triângulos
     GLfloat varAng = 2*M_PI/n; // Incremento do ângulo proporcional ao número de triângulos
 
