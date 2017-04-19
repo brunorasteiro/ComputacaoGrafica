@@ -14,8 +14,10 @@
 #define VIEW_WIDTH  (VIEW_MAXX - VIEW_MINX)
 #define VIEW_HEIGHT (VIEW_MAXY - VIEW_MINY)
 
-#define MILL_CENTERX  200.0;
-#define MILL_CENTERY -150.0;
+#define MILL_CENTERX  200.0
+#define MILL_CENTERY -150.0
+
+#define TERRAIN_AREA -200.0
 
 // Definido em helice.c
 void on_mouse_click(int, int, int, int);

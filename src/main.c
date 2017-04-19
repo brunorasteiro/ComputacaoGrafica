@@ -4,12 +4,12 @@
 void draw(void)
 {
 
-    GLfloat mRot[16]; 
-    
+    GLfloat mRot[16];
+
     // Inicia a matriz de transformações da openGL
     glMatrixMode(GL_MODELVIEW);
 
-    // Salva a matriz com as rotações do moinho 
+    // Salva a matriz com as rotações do moinho
     glGetFloatv(GL_MODELVIEW_MATRIX, mRot);
 
     // Carrega matriz identidade para que as rotações não afetem todo o cenário
@@ -22,7 +22,7 @@ void draw(void)
     glClear(GL_COLOR_BUFFER_BIT);
 
 	drawSunAndSky();
-	// drawGround();
+	drawTerrain();
 	// drawMillTower();
 
     // Carrega a matriz com as rotações do moinho
