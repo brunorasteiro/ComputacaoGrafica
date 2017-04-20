@@ -17,7 +17,6 @@ SOURCES = $(wildcard src/*.c)
 
 .PHONY: all
 all:
-	echo $(OS)
 	mkdir -p bin/
 	gcc $(SOURCES) -Wall -Wextra -Isrc -o bin/$(TARGET) $(LIB_OPTIONS)
 ifeq ($(OS),Windows_NT)
