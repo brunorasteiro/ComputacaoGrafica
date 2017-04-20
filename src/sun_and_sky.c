@@ -66,7 +66,8 @@ void drawSunAndSky()
 	GLint ly[2] = {0, 0};
 
 	// Desenha o sol
-	for(int i = 0; i < count; i++)
+	int i = 0; /* maldito C90 */
+	for(/*int*/ i = 0; i < count; i++)
 	{
 		double aux0 = 2*pi * i/count;
 		double aux1 = 2*pi * (i+1)/count;
