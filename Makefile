@@ -17,10 +17,11 @@ SOURCES = $(wildcard src/*.c)
 
 .PHONY: all
 all:
+	echo $(OS)
 	mkdir -p bin/
 	gcc $(SOURCES) -Wall -Wextra -Isrc -o bin/$(TARGET) $(LIB_OPTIONS)
 ifeq ($(OS),Windows_NT)
-	mv deps_windows/bin/x64/freeglut.dll bin/
+	cp deps_windows/bin/x64/freeglut.dll bin/
 endif
 
 .PHONY: run
