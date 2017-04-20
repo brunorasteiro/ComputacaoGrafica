@@ -1,14 +1,13 @@
 TARGET := catavento
 
-ifeq ($(OS),Windows_NT)
-    TARGET := $(TARGET).exe
-endif
 
+# Flags para Linux
 LIB_OPTIONS := -lglut -lGLU -lGL -lm
 
-ifdef HUGO
-    INC_PATH := -Ic:/tools/include
-    LIB_PATH := -Lc:/tools/lib/x64
+# Flags para Windows
+ifeq ($(OS),Windows_NT)
+    INC_PATH := -Ideps_windows/include
+    LIB_PATH := -Ldeps_windows/lib/x64
     LIBS     := -lfreeglut -lglu32 -lopengl32 -lm
 
     LIB_OPTIONS := $(INC_PATH) $(LIB_PATH) $(LIBS)
@@ -18,7 +17,11 @@ SOURCES = $(wildcard src/*.c)
 
 .PHONY: all
 all:
+	mkdir -p bin/
 	gcc $(SOURCES) -Wall -Wextra -Isrc -o bin/$(TARGET) $(LIB_OPTIONS)
+ifeq ($(OS),Windows_NT)
+	mv deps_windows/bin/x64/freeglut.dll bin/
+endif
 
 .PHONY: run
 run:
