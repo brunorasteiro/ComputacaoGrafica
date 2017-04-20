@@ -27,6 +27,8 @@ void draw(void)
 
     // Carrega a matriz com as rotações do moinho
     glLoadMatrixf(mRot);
+
+    // Desenha a parte superior do moinho
     drawMillHead();
 
     glFlush();
