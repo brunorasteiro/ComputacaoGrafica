@@ -23,7 +23,7 @@ void draw(void)
 
 	drawSunAndSky();
 	drawTerrain();
-	// drawMillTower();
+	drawMillTower();
 
     // Carrega a matriz com as rotações do moinho
     glLoadMatrixf(mRot);
