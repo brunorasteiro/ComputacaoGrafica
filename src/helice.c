@@ -26,8 +26,11 @@ void drawMillHead()
     drawOriginMill(20, 7);
 }
 
-// Achei melhor tirar do main e botar aqui por causa das globais xc, yc
 void on_mouse_click(int button, int state, int x, int y){
+
+	// Ambas as globais abaixo são definidas no interface.h
+	// xc = Coordenada x do centro do moinho
+	// yc = Coordenada y do centro do moinho	
 
 	// Pra tirar warning de variavel nao usada
 	(void) x;

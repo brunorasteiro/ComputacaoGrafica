@@ -29,4 +29,4 @@ Os outros 2 arquivos contém **void drawSunAndSky()** e **voidDrawMillHead()**. 
 
 ## Bugs
 
-O desenho inteiro tá girando junto com o catavento.
+Acho que nada
