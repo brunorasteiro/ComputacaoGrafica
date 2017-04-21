@@ -15,7 +15,7 @@
 #define VIEW_HEIGHT (VIEW_MAXY - VIEW_MINY)
 
 #define MILL_CENTERX  200.0
-#define MILL_CENTERY -150.0
+#define MILL_CENTERY - 75.0
 
 #define TERRAIN_AREA -200.0
 
