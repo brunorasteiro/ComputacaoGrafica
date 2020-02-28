@@ -1,1 +1,5 @@
 bin/*
+
+
+.ipynb_checkpoints/*
+*.ipynb
